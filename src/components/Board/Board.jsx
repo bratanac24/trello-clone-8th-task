@@ -78,6 +78,7 @@ export default function Board(props) {
         </div>
         <Button style={style.newTask} type="text">
           <Add />
+          Vercel
         </Button>
       </Card>
     </>
