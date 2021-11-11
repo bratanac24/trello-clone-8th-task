@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Container, Draggable } from "react-smooth-dnd";
 import "./Board.css";
 import { Card, Button } from "@mui/material";
 import { Add } from "@mui/icons-material";
+
 export default function Board(props) {
-  const { title, titleColor, id, data } = props;
+  const { title, titleColor, id, items, data, setData } = props;
   const [titleBox, setTitleBox] = useState("#00f9");
   useEffect(() => {
     switch (titleColor) {
@@ -34,6 +36,28 @@ export default function Board(props) {
         break;
     }
   });
+
+  const applyDrag = (arr, dragResult) => {
+    const { removedIndex, addedIndex, payload } = dragResult;
+    if (removedIndex === null && addedIndex === null) return arr;
+
+    const result = [...arr];
+    let itemToAdd = payload;
+
+    if (removedIndex !== null) {
+      itemToAdd = result.splice(removedIndex, 1)[0];
+    }
+
+    if (addedIndex !== null) {
+      result.splice(addedIndex, 0, itemToAdd);
+    }
+
+    return changeArray(id, result);
+  };
+  const changeArray = (a, items) => {
+    setData(data.map((x, y) => (y === a ? { ...x, items } : x)));
+    sessionStorage.setItem("data", data);
+  };
 
   const style = {
     board: {
@@ -72,9 +96,16 @@ export default function Board(props) {
           <h3>{title}</h3>
         </Card>
         <div>
-          <Card style={style.task}>Sleep</Card>
-          <Card style={style.task}>Eat</Card>
-          <Card style={style.task}>Fuck</Card>
+          <Container
+            groupName="board-list"
+            getChildPayload={(i) => data[id].items[i]}
+            onDrop={(e) => applyDrag(items, e)}>
+            {items.map((x) => (
+              <Draggable key={x.key}>
+                <Card style={style.task}>{x.text}</Card>
+              </Draggable>
+            ))}
+          </Container>
         </div>
         <Button style={style.newTask} type="text">
           <Add />
