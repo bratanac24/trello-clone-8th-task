@@ -14,22 +14,22 @@ const getData = () => {
       {
         title: "Backlog",
         titleColor: "orange",
-        items: [{ id: 0, text: "Fuck" }],
+        items: [{ id: 0, text: "Get Beer" }],
       },
       {
         title: "In Progress",
         titleColor: "green",
-        items: [{ id: 1, text: "Fuck1" }],
+        items: [{ id: 1, text: "Do Nothing" }],
       },
       {
         title: "Complete",
         titleColor: "blue",
-        items: [{ id: 2, text: "Fuck2" }],
+        items: [{ id: 2, text: "Working" }],
       },
       {
         title: "On hold",
         titleColor: "red",
-        items: [{ id: 3, text: "Fuck3" }],
+        items: [{ id: 3, text: "Sleep" }],
       },
     ];
   }
