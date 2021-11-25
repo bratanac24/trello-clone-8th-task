@@ -1,0 +1,15 @@
+.board {
+  flex: 1 1 0;
+  margin: 20px;
+  min-width: 200px;
+}
+h3 {
+  /*color: rgb(0, 94, 202);*/
+  text-shadow: rgb(143, 159, 214) 0.5px 0.5px;
+  margin: 10px auto;
+}
+@media screen and (max-width: 700px) {
+  .board {
+    min-width: 200px;
+  }
+}
